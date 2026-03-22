@@ -21,7 +21,7 @@ This project is designed to build and test locally using devcontainer.
 
 ```text
 .
-├── gh_pages/          # Jekyll site source
+├── docs/              # Jekyll site source
 │   ├── _posts/        # Blog posts
 │   ├── _config.yml    # Jekyll configuration
 │   ├── index.md       # Homepage

@@ -1,5 +1,5 @@
 # Variables
-JEKYLL_DIR := gh_pages
+JEKYLL_DIR := docs
 
 # ── Help ──────────────────────────────────────────────────────────────────────
 .PHONY: help
