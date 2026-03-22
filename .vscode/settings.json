@@ -1,0 +1,7 @@
+{
+    "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+    "editor": {
+        "formatOnSave": true
+    },
+    "remote.autoForwardPorts": false
+}

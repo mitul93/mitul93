@@ -1,0 +1,42 @@
+# base image
+FROM debian:trixie-slim
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# timezone
+ENV TZ="Etc/UTC"
+
+# locale
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+# install apt packages and dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    git make curl gnupg2 wget ca-certificates openssh-client sudo \
+    # jekyll
+    ruby-full build-essential zlib1g-dev
+
+ARG USERNAME=devcontainer
+ARG USER_UID=1000
+ARG USER_GID=1000
+# add $USER to usergroup
+RUN groupadd --gid ${USER_GID} ${USERNAME} &&\
+    useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} -s /bin/bash && \
+    usermod -aG sudo ${USERNAME} && \
+    echo "${USERNAME}:${USERNAME}_docker" | chpasswd
+
+USER ${USERNAME}
+
+# Ensure local gem install path
+ENV GEM_HOME=/home/${USERNAME}/gems
+ENV PATH=/home/${USERNAME}/gems/bin:$PATH
+
+RUN gem install jekyll bundler
+
+# working directory
+ARG REPOSITORY_NAME=mitul93
+WORKDIR /${REPOSITORY_NAME}
+
+# entry point
+ENTRYPOINT ["/bin/bash"]

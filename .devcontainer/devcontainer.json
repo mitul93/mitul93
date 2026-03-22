@@ -1,0 +1,36 @@
+{
+	"name": "mitul93_devcontainer",
+	"build": {
+		"context": "..",
+		"dockerfile": "Containerfile"
+	},
+	"containerUser": "devcontainer",
+	"userEnvProbe": "loginInteractiveShell",
+	"updateRemoteUserUID": true,
+	"runArgs": [
+		"--rm",
+		"-it",
+		"--memory",
+		"4g",
+		"--memory-swap",
+		"4g",
+		"--cpus",
+		"4"
+	],
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}"
+	},
+	"workspaceMount": "source=${localWorkspaceFolder},target=/mitul93,type=bind,consistency=cached",
+	"workspaceFolder": "/mitul93",
+	"portsAttributes": {
+		"4000": {
+			"label": "Jekyll",
+			"onAutoForward": "notify"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": []
+		}
+	}
+}
